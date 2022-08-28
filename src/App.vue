@@ -1,32 +1,40 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <v-app id="inspire">
+      <v-overlay :value="isLoading">
+        <v-progress-circular
+          indeterminate
+          size="75"
+        ></v-progress-circular>
+      </v-overlay>
+      <router-view />
+    </v-app>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { mapGetters } from 'vuex'
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: 'App',
+  computed: {
+    ...mapGetters({
+      user: 'auth/user',
+      isLoading: 'global/isLoading'
+    })
+  },
+  watch: {
+    user: function (newVal) {
+      if (newVal != null) {
+        this.$router.replace({
+          name: 'menu'
+        })
+      } else {
+        this.$router.replace({
+          name: 'login'
+        })
+      }
     }
   }
 }
-</style>
+</script>

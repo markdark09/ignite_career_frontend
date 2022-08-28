@@ -1,0 +1,19 @@
+.v-overlay {
+    z-index: 7 !important;
+}
+
+@media only screen and (max-width: 1100px) {
+    .v-overlay {
+        z-index: 1 !important;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .v-app-bar {
+        left: 256px !important;
+    }
+    
+    .v-main {
+        padding: 65px 0px 36px 256px !important;
+    }
+}
